@@ -1,0 +1,30 @@
+name: lando-code-server
+recipe: mean
+config:
+  node: 13
+  command: npm start
+  port: '3000'
+services:
+  codeserver:
+    user: root
+    type: compose
+    app_mount: false
+    services:
+      image: codercom/code-server
+      ports:
+        - 8080
+      environment:
+        - "DOCKER_USER=${USER}"
+      volumes:
+        - ./.config/code-server:/home/coder/.config/code-server
+        - ./.local/code-server:/home/coder/.local/share/code-server
+        - ./:/home/coder/project
+        - "${HOME}/.ssh/:/home/coder/.ssh"
+      command: entrypoint.sh /home/coder/project
+      extra_hosts:
+      - host.docker.internal:host-gateway
+proxy:
+  appserver:
+    - code-server-demo.bcamp.tk:3000
+  codeserver:
+    - code-server-demo.cdr.bcamp.tk:8080
