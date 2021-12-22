@@ -5,6 +5,10 @@ config:
   command: npm start
   port: '3000'
 services:
+  appserver:
+    overrides:
+      ports:
+        - 5555:5555
   codeserver:
     user: root
     type: compose
@@ -25,6 +29,6 @@ services:
       - host.docker.internal:host-gateway
 proxy:
   appserver:
-    - code-server-demo.bcamp.tk:3000
+    - lando-code-server.lando:3000
   codeserver:
-    - code-server-demo.cdr.bcamp.tk:8080
+    - lando-code-server-cdr.lando:8080
