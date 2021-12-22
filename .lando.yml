@@ -1,7 +1,7 @@
 name: lando-code-server
 recipe: mean
 config:
-  node: 13
+  node: 14
   command: npm start
   port: '3000'
 services:
@@ -29,6 +29,6 @@ services:
       - host.docker.internal:host-gateway
 proxy:
   appserver:
-    - lando-code-server.lando:3000
+    - lando-code-server.lndo.site:3000
   codeserver:
-    - lando-code-server-cdr.lando:8080
+    - lando-code-server-cdr.lndo.site:8080
